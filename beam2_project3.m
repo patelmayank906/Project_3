@@ -346,7 +346,7 @@ if strcmp(mode,'make')
   k([3 5 9 11],[3 5 9 11])=kb2;
   k([1 7],[1 7])=krod;
   k([4 10],[4 10])=ktor;
-  
+  [v,e]=eig(k)
   % Assembling each mass matrix into the complete elemental 
   % mass matrix
   m=zeros(12,12);
