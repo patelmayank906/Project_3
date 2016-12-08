@@ -19,7 +19,7 @@ element properties
 % Run "units" and type "who" to see variables/values available inside your
 % input file
 
-beam2_project3 elements
+cjs_beam3example elements
 %node1 node2 node3 pointnum (beam properties number)
 1 2 1 1
 2 3 1 1
