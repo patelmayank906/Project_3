@@ -6,7 +6,7 @@ load('reduced_K_M')
 OPTS.issym=1;
   OPTS.isreal=1;
   %To increase accuracy: (Agnes)
-  %OPTS.tol=eps/10;
+  OPTS.tol=eps/10;
   %[Tr,M_r,K_r]=reducedofs;
   [minvals,minvallocs]=sort(diag(K_r)./diag(M_r));
   
@@ -16,8 +16,7 @@ OPTS.issym=1;
   fs=sqrt(diag(f)-shift)/2/pi;
   
   zeta = 0.02;
-  
   zeta_omega1 = 2*zeta*fs*2*pi;
   zeta_omega = diag(zeta_omega1);
-  
-  C = fms/zeta_omega\fms
+  C = fms'\zeta_omega/fms;
+  I4 = C\M_r*C

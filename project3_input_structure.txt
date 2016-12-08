@@ -19,7 +19,7 @@ element properties
 % Run "units" and type "who" to see variables/values available inside your
 % input file
 
-cjs_beam3example elements
+beam2_project3 elements
 %node1 node2 node3 pointnum (beam properties number)
 1 2 1 1
 2 3 1 1
@@ -132,11 +132,14 @@ nodes
 points
 1 1 1 1
 
-fix pin
-1 0 0 1
+%fix pin
+%1 0 0 1
 
 
 fix surfaceball
+1 1 0 0
+1 0 1 0
+1 0 0 1
 51 0 1 0
 51 0 0 1
 2 0 0 1 
@@ -190,7 +193,7 @@ fix surfaceball
 50 0 0 1
 
 load
-51 1 10000
+51 1 100000
 
 actions
 modalanalysis
@@ -204,11 +207,11 @@ fs %dump sorted natural frequencies to the screen
 %modalreview
 %sold=fs %Let's store them for later comparison
 %M=M/4; %Dividing M by 4 should double the natural frequencies
-fs=[]; % WFEM won't run another modal analysis unless I force it to 
+%fs=[]; % WFEM won't run another modal analysis unless I force it to 
 %It's smart enough to know that it has already been done, so I need to 
 %clear the results to it is forced to regenerate them with another
 %modalanalysis.
-%modalanalysis
+modalanalysis
 disp('Natural Frequencies in KHz')
 fprintf('%7.3f %7.3f\n',[fsold'; fs'])
 disp('See, the natural frequency doubled as expected') % I wrote this out 

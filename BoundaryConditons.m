@@ -12,7 +12,7 @@ r2 = 8:6:300;
 r3 = 6:6:306;
 
 rows = sort([r1 r2 r3]);
-column = rows';
+column = rows;
 K_r = full(K(rows,column));
 M_r = full(M(rows,column));
 
