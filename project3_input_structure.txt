@@ -204,11 +204,11 @@ fs %dump sorted natural frequencies to the screen
 %modalreview
 %sold=fs %Let's store them for later comparison
 %M=M/4; %Dividing M by 4 should double the natural frequencies
-%fs=[]; % WFEM won't run another modal analysis unless I force it to 
+fs=[]; % WFEM won't run another modal analysis unless I force it to 
 %It's smart enough to know that it has already been done, so I need to 
 %clear the results to it is forced to regenerate them with another
 %modalanalysis.
-modalanalysis
+%modalanalysis
 disp('Natural Frequencies in KHz')
 fprintf('%7.3f %7.3f\n',[fsold'; fs'])
 disp('See, the natural frequency doubled as expected') % I wrote this out 
