@@ -221,7 +221,9 @@ disp('See, the natural frequency doubled as expected') % I wrote this out
 %end
 %Let's do static analysis
 staticanalysis
+BoundaryConditons
 plotdeformed
+C_matrix_calculation
 %Here are the displacements, X
 X
 end
