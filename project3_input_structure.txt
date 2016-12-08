@@ -5,7 +5,7 @@ l=0.1
 Ixx1=(t^4)/12
 Ixx2=Ixx1
 Iyy1=Ixx1
-Iyy2=Ixx2
+Iyy2=Ixx1
 J1=0.95*(Ixx1+Iyy1)
 J2=0.95*(Ixx2+Iyy2)
 
