@@ -1,0 +1,70 @@
+%% Linear Acceleration (Newark's Method #1)
+load('reduced_K_M')
+
+%Declaring variables
+endT = 0.13;
+T = 0.01;% time
+dT = 0.0001;
+% final time
+beta = 1/4;
+gamma = 1/2;
+R1 = zeros(150,1);
+R1(149,1) = 100000;
+R0 = zeros(150,1);
+d = zeros(150,1); dd = zeros(150,1); %ddd = M_r\R1;
+ddd = zeros(150,1);
+Timestep = 0:dT:endT;
+nstep = length(Timestep);
+disp = zeros(150,1); velo = disp; acce = velo; time = 0;
+%% For loop required
+for i = 1:nstep;
+    
+if nstep*dT <= T
+    R = R1;
+else
+    R = R0;
+end
+
+disp(:,i) = real(dn(:));
+velo(:,i) = real(ddn(:));
+acce(:,i) = real(dddn(:));
+    
+a = (1/(beta*dT^2))*M_r + (gamma/(beta*dT))*C + K_r;
+b = R;
+c = M_r*((1/(beta*dT^2))*d+ dd/(beta*dT) + ((1/(2*beta) - 1)...
+    *ddd));
+d = C*(((gamma*d)/(beta*dT)) + (gamma/beta - 1)*dd...
+    + (gamma/beta - 2)*(dT/2)*ddd);
+dn = a\(b+c+d);
+
+
+ddn= (gamma/(beta*dT))*(dn - d) - ((gamma/beta)-1)...
+    *dd - dT*((gamma/(2*beta))-1)*ddd;
+
+dddn = ((1/(beta*dT^2))*(dn- d-dT*dd)...
+    -((1/(2*beta))-1)*ddd);
+
+
+
+d = dn;
+dd = ddn;
+ddd = dddn;
+time(i) = time + i*dT;
+end
+
+theta = disp(121,:);
+dtheta = velo(121,:);
+ddtheta = acce(121,:);
+hold on
+figure(1)
+plot(time,theta) 
+ylabel('thetaz41 (rad/s)')
+xlabel('time(s)')
+figure(2)
+plot(time,dtheta) 
+ylabel('dthetaz41 (rad/s)')
+xlabel('time(s)')
+figure(3)
+plot(time,ddtheta)
+ylabel('ddthetaz41 (rad/s)')
+xlabel('time(s)')
