@@ -4,39 +4,39 @@ function [displ, velo, acce] = Newmark
 
 load('project3_input_structure.mat','K','M')
 
-    disp('')
-    disp('Select the Newmark Method to be used');
-    disp('1 - Linear Acceleration Method');
-    disp('2 - Average Acceleration Method');
-    disp('3 - Algorithmically damped Method');
-    disp('4 - Hilber-Hughes-Taylor Method');
-    disp('5 - Fox-Godwin Method');
-    disp('Select Number for the Newmark Method');
-    
-    Method = input('-> ') ;
-
-    if Method == 1;
-        gamma = 1/2;
-        Beta = 1/6;
-        dT = 0.000001;
-    elseif Method == 2;
-        gamma = 1/2;
-        Beta = 1/4;
-        dT = 0.0001;
-    elseif Method == 3;
-        gamma = 0.55;
-        Beta = (gamma+0.5)^2*0.25;
-        dT = 0.0001;
-    elseif Method == 4;
-        alpha = -0.25;
-        gamma = 0.5*(1-2*alpha);
-        Beta = 0.25*(1-alpha)^2;
-        dT = 0.0001;
-    else Method = 5;
-        gamma = 1/2;
-        Beta = 1/12;
-        dT = 0.000001;
-    end
+%     disp('')
+%     disp('Select the Newmark Method to be used');
+%     disp('1 - Linear Acceleration Method');
+%     disp('2 - Average Acceleration Method');
+%     disp('3 - Algorithmically damped Method');
+%     disp('4 - Hilber-Hughes-Taylor Method');
+%     disp('5 - Fox-Godwin Method');
+%     disp('Select Number for the Newmark Method');
+%     
+%     Method = input('-> ') ;
+% 
+%     if Method == 1;
+%         gamma = 1/2;
+%         Beta = 1/6;
+%         dT = 0.000001;
+%     elseif Method == 2;
+%         gamma = 1/2;
+%         Beta = 1/4;
+%         dT = 0.0001;
+%     elseif Method == 3;
+%         gamma = 0.55;
+%         Beta = (gamma+0.5)^2*0.25;
+%         dT = 0.0001;
+%     elseif Method == 4;
+%         alpha = -0.25;
+%         gamma = 0.5*(1-2*alpha);
+%         Beta = 0.25*(1-alpha)^2;
+%         dT = 0.0001;
+%     else Method = 5;
+%         gamma = 1/2;
+%         Beta = 1/12;
+%         dT = 0.000001;
+%     end
 
 %%% The K- and M- Matrix generated using the Beam2 code is in 3D. We need
 %%% to convert the K and M matrix in 2D and Apply the Boundary Conditions..
@@ -50,9 +50,9 @@ zeta = 0.02;
 
 
 %%% Calculating the Time Increment
-% Beta = 0.25;
-% gamma = 0.5;
-% dT = stability(gamma,Beta,zeta,fs);
+Beta = 0.25;
+gamma = 0.5;
+dT = stability(gamma,Beta,zeta,fs);
 
 
 endT = 0.13;  %%% End Time for Simulation
