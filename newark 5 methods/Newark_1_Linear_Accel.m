@@ -2,21 +2,29 @@
 load('reduced_K_M')
 load('C_matrix')
 
-%Declaring variables
-endT = 0.13;
-T = 0.01;% time
-dT = 0.000001;
-% final time
+endT = 0.13;  %%% End Time for Simulation
+T = 0.01;     %%% Impulse Time for Force
+dT = 0.000001;%%% Time Step
+
 Beta = 1/12;
 gamma = 1/2;
+
+%%% Applied Force
 R1 = zeros(150,1);
 R1(149,1) = 100000;
 R0 = zeros(150,1);
+
+%%% Initial Conditions
 d = zeros(150,1); dd = zeros(150,1); ddd = M_r\R1;
-%ddd = zeros(150,1);
+
+%%% TimeStep Calculation
 Timestep = 0:dT:endT;
 nstep = length(Timestep);
-disp = zeros(150,1); velo = disp; acce = velo; time = zeros(150,nstep);
+
+%%% Preallocation of Matrices
+disp = zeros(150,1); velo = disp; acce = velo;
+
+
 %% For loop required
 for i = 1:nstep;
     step = Timestep(i);
