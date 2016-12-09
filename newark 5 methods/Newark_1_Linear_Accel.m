@@ -1,14 +1,14 @@
-%% Linear Acceleration (Newark's Method #1)
-load('project3_input_structure','K','M')
+%% Linear Acceleration (Newmark's Method #1)
+load('project3_input_structure.mat','K','M')
 
     disp(' ') ;
     disp('Select the Newmark Method to be used');
-    disp('1 - Linear Acceleration');
-    disp('2 - Average Acceleration');
-    disp('3 - Algorithmically damped');
-    disp('4 - Hilber-Hughes-Taylor');
-    disp('5 - Fox-Godwin');
-    disp('Enter Number for the Newmark Method');
+    disp('1 - Linear Acceleration Method');
+    disp('2 - Average Acceleration Method');
+    disp('3 - Algorithmically damped Method');
+    disp('4 - Hilber-Hughes-Taylor Method');
+    disp('5 - Fox-Godwin Method');
+    disp('Select Number for the Newmark Method');
     
     Method = input('-> ') ;
 
@@ -27,7 +27,7 @@ load('project3_input_structure','K','M')
     elseif Method == 4;
         alpha = -0.25;
         gamma = 0.5*(1-2*alpha);
-        Beta = 0.25*(1-alpha)^2
+        Beta = 0.25*(1-alpha)^2;
         dT = 0.0001;
     else Method == 5;
         gamma = 1/2;
