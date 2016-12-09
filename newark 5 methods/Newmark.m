@@ -1,11 +1,8 @@
 <<<<<<< HEAD:newark 5 methods/Newmark.m
 %%% Newmark Method
 function [displ, velo, acce] = Newmark
-load('project3_input_structure','K','M')
-=======
-%% Linear Acceleration (Newmark's Method #1)
+
 load('project3_input_structure.mat','K','M')
->>>>>>> origin/master:newark 5 methods/Newark_1_Linear_Accel.m
 
     disp('')
     disp('Select the Newmark Method to be used');
@@ -115,8 +112,7 @@ ddtheta = acce(121,:);
 hold on;
 figure()
 plot(Timestep,theta)
-title(sprintf('Numerical Solution for Leapfrog method for CFL=%0.2f',Method))
-%title('Displacement')
+title('Displacement')
 ylabel('\theta_{z41} (rad/s)')
 xlabel('time(s)')
 figure()
