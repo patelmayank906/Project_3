@@ -1,7 +1,8 @@
-%% Linear Acceleration (Newark's Method #1)
+%%% Newmark Method
+function [displ, velo, acce] = Newmark
 load('project3_input_structure','K','M')
 
-    disp(' ') ;
+    disp('')
     disp('Select the Newmark Method to be used');
     disp('1 - Linear Acceleration');
     disp('2 - Average Acceleration');
@@ -27,9 +28,9 @@ load('project3_input_structure','K','M')
     elseif Method == 4;
         alpha = -0.25;
         gamma = 0.5*(1-2*alpha);
-        Beta = 0.25*(1-alpha)^2
+        Beta = 0.25*(1-alpha)^2;
         dT = 0.0001;
-    else Method == 5;
+    else Method = 5;
         gamma = 1/2;
         Beta = 1/12;
         dT = 0.000001;
@@ -49,7 +50,7 @@ zeta = 0.02;
 %%% Calculating the Time Increment
 % Beta = 0.25;
 % gamma = 0.5;
-% dT = stability(gamma,Beta,zeta,fs)
+% dT = stability(gamma,Beta,zeta,fs);
 
 
 endT = 0.13;  %%% End Time for Simulation
@@ -69,10 +70,11 @@ Timestep = 0:dT:endT;
 nstep = length(Timestep);
 
 %%% Preallocation of Matrices
-disp = zeros(150,1); velo = disp; acce = velo;
+displ = zeros(150,1); velo = displ; acce = velo;
 
 
-%% For loop required
+%%% Loop to Calculate Displacement, Velocity and Acceleration
+
 for i = 1:nstep;
     step = Timestep(i);
 if Timestep(i) <= T
@@ -93,7 +95,7 @@ ddn= (gamma/(Beta*dT))*(dn-d)- ((gamma/Beta)-1)*dd - dT*((gamma/(2*Beta))-1)*ddd
 dddn = ((1/(Beta*dT^2))*(dn- d-dT*dd)...
     -((1/(2*Beta))-1)*ddd);
 
-disp(:,i) = real(dn(:));
+displ(:,i) = real(dn(:));
 velo(:,i) = real(ddn(:));
 acce(:,i) = real(dddn(:));
 
@@ -102,21 +104,22 @@ dd = ddn;
 ddd = dddn;
 end
 
-theta = disp(121,:);
+theta = displ(121,:);
 dtheta = velo(121,:);
 ddtheta = acce(121,:);
-hold on
-figure(1)
+hold on;
+figure()
 plot(Timestep,theta)
-title('Displacement')
+title(sprintf('Numerical Solution for Leapfrog method for CFL=%0.2f',Method))
+%title('Displacement')
 ylabel('\theta_{z41} (rad/s)')
 xlabel('time(s)')
-figure(2)
+figure()
 plot(Timestep,dtheta)
 title('Velocity')
 ylabel('d\theta_{z41} (rad/s)')
 xlabel('time(s)')
-figure(3)
+figure()
 plot(Timestep,ddtheta)
 title('Acceleration')
 ylabel('dd\theta_{z41} (rad/s)')
