@@ -1,13 +1,60 @@
 %% Linear Acceleration (Newark's Method #1)
-load('reduced_K_M')
-load('C_matrix')
+load('project3_input_structure','K','M')
+
+    disp(' ') ;
+    disp('Select the Newmark Method to be used');
+    disp('1 - Linear Acceleration');
+    disp('2 - Average Acceleration');
+    disp('3 - Algorithmically damped');
+    disp('4 - Hilber-Hughes-Taylor');
+    disp('5 - Fox-Godwin');
+    disp('Enter Number for the Newmark Method');
+    
+    Method = input('-> ') ;
+
+    if Method == 1;
+        gamma = 1/2;
+        Beta = 1/6;
+        dT = 0.000001;
+    elseif Method == 2;
+        gamma = 1/2;
+        Beta = 1/4;
+        dT = 0.0001;
+    elseif Method == 3;
+        gamma = 0.55;
+        Beta = (gamma+0.5)^2*0.25;
+        dT = 0.0001;
+    elseif Method == 4;
+        alpha = -0.25;
+        gamma = 0.5*(1-2*alpha);
+        Beta = 0.25*(1-alpha)^2
+        dT = 0.0001;
+    else Method == 5;
+        gamma = 1/2;
+        Beta = 1/12;
+        dT = 0.000001;
+    end
+
+%%% The K- and M- Matrix generated using the Beam2 code is in 3D. We need
+%%% to convert the K and M matrix in 2D and Apply the Boundary Conditions..
+
+[K_r,M_r] = boundary_conditions(K,M);
+
+%%% Calculation of C-Matrix
+zeta = 0.02;
+[C,fs] = Damping(K_r,M_r,zeta);
+
+
+
+%%% Calculating the Time Increment
+% Beta = 0.25;
+% gamma = 0.5;
+% dT = stability(gamma,Beta,zeta,fs)
+
 
 endT = 0.13;  %%% End Time for Simulation
 T = 0.01;     %%% Impulse Time for Force
-dT = 0.000001;%%% Time Step
-
-Beta = 1/12;
-gamma = 1/2;
+%2dT = 0.0001;%%% Time Step
 
 %%% Applied Force
 R1 = zeros(150,1);
@@ -60,14 +107,17 @@ dtheta = velo(121,:);
 ddtheta = acce(121,:);
 hold on
 figure(1)
-plot(Timestep,theta) 
-ylabel('thetaz41 (rad/s)')
+plot(Timestep,theta)
+title('Displacement')
+ylabel('\theta_{z41} (rad/s)')
 xlabel('time(s)')
 figure(2)
-plot(Timestep,dtheta) 
-ylabel('dthetaz41 (rad/s)')
+plot(Timestep,dtheta)
+title('Velocity')
+ylabel('d\theta_{z41} (rad/s)')
 xlabel('time(s)')
 figure(3)
 plot(Timestep,ddtheta)
-ylabel('ddthetaz41 (rad/s)')
+title('Acceleration')
+ylabel('dd\theta_{z41} (rad/s)')
 xlabel('time(s)')
