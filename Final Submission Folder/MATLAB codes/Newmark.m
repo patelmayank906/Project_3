@@ -64,7 +64,7 @@ zeta = 0.02;
 % dT = stability(gamma,Beta,zeta,fs);
 
 
-endT = 0.13;  %%% End Time for Simulation
+endT = 0.2;  %%% End Time for Simulation
 T = 0.01;     %%% Impulse Time for Force
 %dT = 0.0001;%%% Time Step
 
@@ -106,7 +106,7 @@ ddn= (gamma/(Beta*dT))*(dn-d)- ((gamma/Beta)-1)*dd - dT...
     *((gamma/(2*Beta))-1)*ddd;
 
 %%% Calculate the Acceleration for the Next Time Step
-dddn = ((1/(Beta*dT^2))*(dn- d-dT*dd)...
+dddn = ((1/(Beta*dT^2))*(dn- d -dT*dd)...
     -((1/(2*Beta))-1)*ddd);
 
 
